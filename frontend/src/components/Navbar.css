@@ -1,0 +1,107 @@
+.navbar {
+    background-color: #fcf5f5;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 50px;
+    height: 65px;
+}
+
+.nav-left {
+    flex: 3;
+    text-align: center;
+}
+
+.nav-logo {
+    font-weight: 900;
+    font-size: 30px;
+    padding: 15px 0;
+}
+
+.nav-center {
+    flex: 8;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
+}
+
+
+.nav-list {
+    flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+}
+
+.nav-item {
+    font-size: 16px;
+    padding: 22px 20px;
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    background-color: #be8080;
+    color: white;
+}
+
+.nav-search {
+    flex: 4;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+}
+
+.nav-search-input {
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.nav-right {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    text-align: center;
+    justify-content: center;
+}
+
+.nav-sign {
+    flex: 1;
+    font-size: 16px;
+    padding: 22px 5px;
+    cursor: pointer;
+}
+
+.nav-theme-toggle {
+    height: 15px;
+    width: 30px;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 30px;
+    position: relative;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.nav-theme-circle {
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 30px;
+    position: absolute;
+    top: -2px;
+}
+
+.left {
+    left: -1px;
+}
+
+.right {
+    right: -1px;
+}

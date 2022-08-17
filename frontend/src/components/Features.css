@@ -1,0 +1,39 @@
+.features {
+    margin: 0;
+}
+
+.features-wrapper {
+    min-height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 100px;
+    padding: 0 70px;
+    line-height: 1.5rem;
+}
+
+.feature-card {
+    flex: 1;
+    padding: 30px;
+    margin: 0 50px;
+    text-align: center;
+}
+
+.feature-icon {
+    transform: scale(3);
+    margin: 30px;
+}
+
+.feature-title {
+    padding: 8px;
+    font-size: 1.5rem;
+}
+
+.feature-desc {
+    padding: 8px;
+}
+
+.feature-icon:hover {
+    color: gray;
+}
