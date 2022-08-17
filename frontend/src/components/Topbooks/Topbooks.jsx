@@ -1,6 +1,6 @@
 import './Topbooks.css';
 import Topbook from './Topbook'
-import { topbooks } from '../data';
+import { topbooks } from '../../data';
 
 
 export default function Topbooks() {

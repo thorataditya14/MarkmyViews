@@ -2,7 +2,7 @@ import './Slider.css';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from 'react';
-import { topbooks } from '../data';
+import { topbooks } from '../../data';
 
 
 export default function Slider() {
