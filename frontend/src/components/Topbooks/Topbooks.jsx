@@ -3,10 +3,10 @@ import Topbook from './Topbook'
 import { topbooks } from '../../data';
 
 
-export default function Topbooks() {
+export default function Topbooks({category}) {
     return (
         <div className="topbooks">
-            {topbooks.map((item, index) => (
+            {topbooks.slice(0, 4).map((item, index) => (
                 <Topbook
                     key={item.id}
                     img={item.img}

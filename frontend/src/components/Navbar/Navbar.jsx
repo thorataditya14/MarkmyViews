@@ -1,5 +1,7 @@
 import './Navbar.css';
 import Search from '@mui/icons-material/Search';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -33,8 +35,13 @@ export default function Navbar() {
             <div className="nav-right">
                 <div className="nav-sign">Sign In</div>
                 <div className="nav-sign">Sign Up</div>
-                <div className="nav-theme-toggle">
-                    <div className={"nav-theme-circle " + ((position % 2) ? 'left' : 'right')} onClick={handleClick}></div>
+                <div className="theme">
+                    <div className="nav-theme-toggle">
+                        <DarkModeIcon fontSize='small'/>
+                        <div className={"nav-theme-circle " + ((position % 2) ? 'right' : 'left')} onClick={handleClick}></div>
+                        {/* <div className={"nav-theme-circle " + ((position % 2) ? 'left' : 'right')} onClick={handleClick}></div> */}
+                        <LightModeIcon fontSize='small'/>
+                    </div>
                 </div>
             </div>
         </div>
