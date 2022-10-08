@@ -1,7 +1,7 @@
 import './Bookcategory.css';
 
 
-export default function Topbook({ img, title, desc }) {
+export default function Bookcategory({ img, title, desc }) {
     return (
         <div className="bookcategory">
             <img className="bookcategory-img" src={img} alt={title} />

@@ -14,7 +14,7 @@ export default function Home() {
             <Navbar/>
             <Title/>
             <Slider/>
-            <Heading text={"Features"}/>
+            <Heading text={"Features"} bgcolor={'#fcf5f5'}/>
             <Features/>
             <Heading text={"Top Books"}/>
             <Subheading text={"Fiction"}/>

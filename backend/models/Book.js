@@ -8,7 +8,7 @@ const ProductSchema = new mongoose.Schema(
             required: true,
             unique: true
         },
-        tile: {
+        title: {
             type: String,
             required: true,
         },

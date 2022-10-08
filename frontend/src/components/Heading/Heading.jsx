@@ -1,9 +1,9 @@
 import './Heading.css';
 
 
-export default function Heading({text}) {
+export default function Heading({text, bgcolor}) {
     return (
-        <div className="heading">
+        <div className="heading" style={{backgroundColor: bgcolor}}>
             <div className="left-line"></div>
             <h1 className='heading-text'>
                 {text}

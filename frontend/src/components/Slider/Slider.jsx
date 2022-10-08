@@ -20,7 +20,7 @@ export default function Slider() {
         }
     };
 
-    const styles = { 
+    const styles = {
         transform: `translate(${slideIndex * -100}vw , 0px)`
     };
 
@@ -46,15 +46,19 @@ export default function Slider() {
                             </div>
                             <div className="slide-desc">
                                 Discovered in the attic in which she spent the last years of her life, Anne Frank’s remarkable diary has become a world classic—a powerful reminder of the horrors of war and an eloquent testament to the human spirit.
-                                <br/>
+                                <br />
                                 In 1942, with the Nazis occupying Holland, a thirteen-year-old Jewish girl and her family fled their home in Amsterdam and went into hiding. For the next two years, until their whereabouts were betrayed to the Gestapo, the Franks and another family lived cloistered in the “Secret Annexe” of an old office building. Cut off from the outside world, they faced hunger, boredom, the constant cruelties of living in confined quarters, and the ever-present threat of discovery and death. In her diary Anne Frank recorded vivid impressions of her experiences during this period. By turns thoughtful, moving, and surprisingly humorous, her account offers a fascinating commentary on human courage and frailty and a compelling self-portrait of a sensitive and spirited young woman whose promise was tragically cut short.
+                            </div>
+                            <div className="slide-button-container">
+                                <button className="slide-button">Add to Wishlist</button>
+                                <button className="slide-button">View Book</button>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
 
-{/*
+            {/*
             <div className="slider-left">
                 <div className="slider-img">This is image</div>
             </div>
