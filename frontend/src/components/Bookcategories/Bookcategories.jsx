@@ -1,27 +1,21 @@
 import './Bookcategories.css';
 import Bookcategory from './Bookcategory'
-import { topbooks } from '../../data';
-
+import { categoriesData } from '../../data';
+import { Link } from 'react-router-dom';
 
 export default function Bookcategories() {
     return (
         <div className="bookcategories">
-
-
-
-            {topbooks.map((item, index) => (
-                <Bookcategory
-                    key={item.id}
-                    img={item.img}
-                    title={item.title}
-                />
+            {categoriesData.map((item) => (
+                <Link to={"/categories/" + item.categorycode}>
+                    <Bookcategory
+                        key={item.id}
+                        img={item.img}
+                        categorycode={item.categorycode}
+                        title={item.title}
+                    />
+                </Link>
             ))}
-
-            {/* <Subheading text={"Features"}/> */}
-            {/* <Subheading text={"Fiction"}/> */}
-            {/* <Subheading text={"Adventure"}/> */}
-            {/* <Subheading text={"Non Fiction"}/> */}
-            
         </div>
     )
 }

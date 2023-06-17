@@ -1,39 +1,61 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
-const cors = require("cors");
-// const userRoute = require("./routes/user");
-const authRoute = require("./routes/auth");
-// const productRoute = require("./routes/product");
-// const cartRoute = require("./routes/cart");
-// const orderRoute = require("./routes/order");
-// const stripeRoute = require("./routes/stripe");
+// configure dotenv
+require("dotenv").config()
 
 
-mongoose.connect(
-    process.env.MONGO_URI
-).then(() => {
-    console.log('Database connected successfully');
-}).catch((err) => {
-    console.log(err);
-});
+// import modeules
+const express = require('express')
+const app = express()
+const mongoose = require("mongoose")
+const cors = require("cors")
 
 
-const PORT = 5000;
+// import routes
+const authRoute = require('./routes/auth')
+const usersRoute = require('./routes/users')
+const booksRoute = require('./routes/books')
+const reviewsRoute = require('./routes/reviews')
 
 
-app.use(express.json());
-app.use(cors());
-app.use("/api/auth", authRoute);
-// app.use("/api/users", userRoute);
-// app.use("/api/products", productRoute);
-// app.use("/api/carts", cartRoute);
-// app.use("/api/orders", orderRoute);
-// app.use("/api/checkout", stripeRoute);
+// server port
+const PORT = process.env.API_PORT || 8000;
 
 
-app.listen(process.env.PORT || PORT, () => {
-    console.log(`Backend server is running on port ${process.env.PORT || PORT}`);
+// middlewares
+app.set('trust proxy', true)
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cors())
+
+
+// use routes
+app.use("/auth", authRoute)
+app.use("/users", usersRoute)
+app.use("/books", booksRoute)
+app.use("/reviews", reviewsRoute)
+
+
+// database connection
+try {
+    mongoose.set('strictQuery', false)
+    mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    console.log("database connected successfully")
+} catch (error) {
+    console.log("database connection failed. exiting now...")
+    console.error(error)
+    process.exit(1)
+}
+
+
+// welcome route
+app.get("/", (req, res) => {
+    res.status(200).send("welcome, backend server is running")
+})
+
+
+// server listening 
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

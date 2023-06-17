@@ -1,97 +1,128 @@
-const router = require("express").Router();
+// require("dotenv").config();
+const bcrypt = require("bcrypt");
+const express = require('express')
+const jwt = require("jsonwebtoken");
+const router = express.Router()
 const User = require("../models/User");
-const { verifyTokenAndAdmin, verifyTokenAndAuthorization } = require("./verifyToken");
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("../middlewares/verifyAuth.js");
+router.use(express.json())
 
 
-// Update User
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
-    if (req.body.password) {
-        req.body.password = CryptoJS.AES.encrypt(
-            req.body.password,
-            process.env.PASS_SEC
-        ).toString();
-    }
+// Create user
+router.post("/create-user", verifyTokenAndAdmin, async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-            $set: req.body
-        }, {new: true});
-        res.status(200).json(updatedUser);
-    }
-    catch (err) {
-        res.status(500).json(err);
+        const { firstname, lastname, email, password } = req.body;
+
+        if (!(email && password && firstname && lastname))
+            return res.status(400).send({ MSG: "All input is required" });
+
+        const oldUser = await User.findOne({ email: email });
+        if (oldUser)
+            return res.status(400).send({ MSG: "User already exists, please login" });
+
+        encryptedPassword = await bcrypt.hash(password, 10);
+        const newUser = await User.create({
+            firstname,
+            lastname,
+            email: email.toLowerCase(),
+            password: encryptedPassword,
+            isAdmin: req.body.isAdmin || false,
+        });
+
+        const createdUser = {
+            userid: newUser._id,
+            firstname: newUser.firstname,
+            lastname: newUser.lastname,
+            email: newUser.email,
+            isAdmin: newUser.isAdmin,
+        }
+
+        res.status(201).send(createdUser);
+    } catch (err) {
+        console.log(err);
     }
 });
 
 
-// Delete User
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+// Get all users
+router.get("/get-users", verifyTokenAndAdmin, async (req, res) => {
     try {
-        await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("User has been deleted . . .");
-    }
-    catch (err) {
-        res.status(500).json(err);
+        const QUERIES = req.query
+
+        const users = await User.find(QUERIES, { password: 0 })
+
+        if (!users.length)
+            return res.status(409).send({ MSG: "No users found" });
+
+        return res.status(201).send(users);
+    } catch (err) {
+        console.log(err);
     }
 });
 
 
-// Get User
-router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
+// Get Individual user
+router.get("/get-user/:userid", verifyTokenAndAdmin, async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        const {password, ...others} = await User.findById(req.params.id);        
-        res.status(200).json(others);
-    }
-    catch (err) {
-        res.status(500).json(err);
+        const user = await User.findById(req.params.userid)
+
+        if (!user)
+            return res.status(409).send({ MSG: "No user with given id" });
+
+        const { password, ...userdetails } = user._doc;
+        return res.status(201).send(userdetails);
+    } catch (err) {
+        console.log(err);
     }
 });
 
 
-// Get All Users
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
-    const query = req.query.new;
+// Update user
+router.put("/update-user/:userid", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const user = query
-            ? await User.find().sort({ _id: -1 }).limit
-            : User.find();
-        const {password, ...others} = await User.findById(req.params.id);        
-        res.status(200).json(users);
-    }
-    catch (err) {
-        res.status(500).json(err);
+        const user = await User.findById(req.params.userid)
+
+        if (!user)
+            return res.status(409).send({ MSG: "No user with given id" });
+
+        const userdetails = {
+            firstname: req.body.firstname || user.firstname,
+            lastname: req.body.lastname || user.lastname,
+            email: req.body.email || user.email,
+            isAdmin: req.body.isAdmin || user.isAdmin,
+        }
+
+        if (req.body.password) {
+            encryptedPassword = await bcrypt.hash(req.body.password, 10);
+            userdetails.password = encryptedPassword || user.password
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.userid,
+            userdetails,
+            { new: true }
+        );
+
+        return res.status(200).send(updatedUser);
+    } catch (err) {
+        console.log(err);
     }
 });
 
 
-// Get User Stats
-router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
-    const date = new Date();
-    const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-
+// Delete user
+router.delete("/delete-user/:userid", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const data = await User.aggregate([
-            {
-                $match: {
-                    createdAt: { $gte: lastYear }
-                }
-            },
-            {
-                $project: {
-                    month: { $month: "$createdAt" }
-                }
-            },
-            {
-                $group: {
-                    _id: "$month",
-                    total: { $sum: 1 }
-                }
-            }
-        ]);
-        res.status(200).json(data);
-    }
-    catch (err) {
-        res.status(500).json(err);
+        const user = await User.findById(req.params.userid)
+
+        if (!user)
+            return res.status(409).send({ MSG: "No user with given id" });
+
+        const deletedUser = await User.findByIdAndDelete(req.params.userid)
+
+        return res.status(200).send(deletedUser);
+    } catch (err) {
+        console.log(err);
     }
 });
 

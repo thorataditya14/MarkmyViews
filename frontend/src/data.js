@@ -72,3 +72,96 @@ export const topbooks = [
         desc: "Overview: This new networking text follows a top-down approach. The presentation begins with anexplanation of the application layer, which makes it easier for students to understand how network devices work, and then moves on to discuss the other layers, ending withthe physical layer."
     }
 ];
+
+
+
+
+export const categoriesData = [
+    {
+        id: 1,
+        img: "/images/dsa.png",
+        categorycode: "dsa",
+        title: "Data Structures and Algorithm",
+    },
+    {
+        id: 2,
+        img: "/images/oop.png",
+        categorycode: "oop",
+        title: "Object Oriented Programming",
+    },
+    {
+        id: 3,
+        img: "/images/dbms.png",
+        categorycode: "dbms",
+        title: "Database Management System",
+    },
+    {
+        id: 4,
+        img: "/images/os.jpg",
+        categorycode: "os",
+        title: "Operating System",
+    },
+    {
+        id: 5,
+        img: "/images/cn.jpg",
+        categorycode: "cn",
+        title: "Computer Networking",
+    },
+    {
+        id: 6,
+        img: "/images/ml.jpg",
+        categorycode: "ml",
+        title: "Machine Learning",
+    },
+    {
+        id: 7,
+        img: "/images/ai.jpg",
+        categorycode: "ai",
+        title: "Artificial Intelligence",
+    },
+    {
+        id: 8,
+        img: "/images/se.png",
+        categorycode: "se",
+        title: "Software Engineering",
+    },
+    {
+        id: 9,
+        img: "/images/em.jpg",
+        categorycode: "em",
+        title: "Engineering Mathematics",
+    },
+    {
+        id: 10,
+        img: "/images/gate.png",
+        categorycode: "gate",
+        title: "GATE Exam",
+    },
+    {
+        id: 11,
+        img: "/images/gre.jpg",
+        categorycode: "gre",
+        title: "GRE Exam",
+    },
+    {
+        id: 12,
+        img: "/images/cat.png",
+        categorycode: "cat",
+        title: "CAT Exam",
+    },
+    // {
+    //     id: 13,
+    //     img: "",
+    //     title: "Mechanics",
+    // },
+    // {
+    //     id: 14,
+    //     img: "",
+    //     title: "Engineering Mathematics",
+    // },
+    // {
+    //     id: 9,
+    //     img: "",
+    //     title: "Electronics",
+    // }
+]

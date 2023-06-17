@@ -3,13 +3,15 @@ const mongoose = require("mongoose");
 
 const ReviewSchema = new mongoose.Schema(
     {
-        username: {
-            type: String,
+        userid: {
+            type: mongoose.Types.ObjectId,
             required: true,
+            ref:"User"
         },
-        isbn: {
-            type: String,
+        bookid: {
+            type: mongoose.Types.ObjectId,
             required: true,
+            ref:"Book"
         },
         rating: {
             type: Number,

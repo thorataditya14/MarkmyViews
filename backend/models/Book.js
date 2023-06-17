@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-const ProductSchema = new mongoose.Schema(
+const BookSchema = new mongoose.Schema(
     {
         isbn: {
             type: String,
@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        author: {
+        authors: {
             type: String,
             required: true,
         },
@@ -20,21 +20,17 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        img: {
+        imgurl: {
             type: String,
             required: true
         },
-        categories: {
-            type: Array,
+        categories: [{
+            type: String,
             required: true
-        },
-        rating: {
-            type: Number,
-            required: true
-        }
+        }]
     },
     { timestamps: true }
 );
 
 
-module.exports = mongoose.model("Product", ProductSchema);
+module.exports = mongoose.model("Book", BookSchema);

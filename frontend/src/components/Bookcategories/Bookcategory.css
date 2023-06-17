@@ -1,12 +1,13 @@
 .bookcategory {
     flex: 1;
     margin: 20px;
-    min-width: 240px;
-    height: 360px;
+    width: 300px;
+    height: 280px;
+    /* padding: 20px; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     box-shadow: 0px 0px 3px #7d7d7d;
     cursor: pointer;
     transition: all 0.5s ease;
@@ -16,10 +17,13 @@
     transform: scale(1.1);
     opacity: 0.8;
 }
+
 .bookcategory-img {
-    height: 240px;
-    margin: 10px;
-    vertical-align: middle;    
+    height: 180px;
+    max-width: 240px;
+    margin: 10px 30px 10x;
+    vertical-align: middle;
+    margin-top: 20px;
 }
 
 .bookcategory-title {
@@ -27,4 +31,5 @@
     margin: 10px 0 0 0;
     text-align: center;
     width: 80%;
+    margin-bottom: 20px;
 }
